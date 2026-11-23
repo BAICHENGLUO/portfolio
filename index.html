@@ -281,7 +281,7 @@ details.deploy code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px
     </div>
     <div class="portrait">
       <div class="portrait-frame">
-        <img src="assets/portrait.jpg" alt="童乐 证件照">
+        <img src="assets/portrait.jpg" alt="童乐 证件照" decoding="async">
       </div>
       <div class="portrait-cap"><span>TONG LE</span><span>PORTFOLIO</span></div>
     </div>
@@ -590,12 +590,12 @@ function renderFilms(listId, films){
   films.forEach(f => {
     let media;
     if(f.type === "video"){
-      media = `<video controls preload="metadata" playsinline poster="${f.poster}">
+      media = `<video controls preload="metadata" loading="lazy" playsinline poster="${f.poster}">
         <source src="${f.src}" type="video/mp4">您的浏览器不支持视频播放。
       </video>`;
     }else if(f.poster){
       media = `<div class="film-poster">
-        <img src="${f.poster}" alt="${f.title}">
+        <img src="${f.poster}" alt="${f.title}" loading="lazy" decoding="async">
       </div>`;
     }else{
       media = `<div class="film-poster placeholder" data-title="${f.title}"></div>`;
@@ -638,6 +638,7 @@ function renderGallery(gridId, items, group){
     const card = el("figure","shot",
       `<div class="shot-thumb">
          <img src="${item.src}" alt="${item.title}" data-lightbox data-group="${group}"
+              loading="lazy" decoding="async"
               data-title="${item.title}" data-desc="${item.desc}">
        </div>
        <figcaption class="shot-body">
