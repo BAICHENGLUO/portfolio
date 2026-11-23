@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>童乐 · AI美术/视频生成 作品集</title>
+<meta name="description" content="童乐 · AIGC 短片角色 / 场景概念设计与图生视频作品集：公司项目、个人原创全流程作品、影展获奖、角色设定与场景概念。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+/* ============================================================
+   基础与变量
+============================================================ */
+:root{
+  --bg:#0c0c0e;
+  --surface:#151518;
+  --surface-2:#1b1b20;
+  --line:#27272d;
+  --text:#ede9df;
+  --muted:#8f8b80;
+  --faint:#625f57;
+  --accent:#c9a35c;
+  --accent-soft:rgba(201,163,92,.14);
+  --blue:#7d8c99;
+  --serif:"Noto Serif SC", "Songti SC", Georgia, serif;
+  --sans:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --wrap:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px;}
+
+/* ============================================================
+   顶部导航
+============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);background:rgba(12,12,14,.72);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:var(--wrap);margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:var(--serif);font-weight:700;letter-spacing:.18em;font-size:15px;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:24px;font-size:13px;color:var(--muted);flex-wrap:wrap;}
+.nav-links a{transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+@media(max-width:860px){
+  .nav-links{display:flex;gap:16px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+}
+
+/* ============================================================
+   Hero
+============================================================ */
+.hero{padding:140px 0 80px;position:relative;overflow:hidden;}
+.hero::before,.hero::after{content:"";position:absolute;left:0;right:0;height:56px;background:#000;opacity:.5;}
+.hero::before{top:0;}
+.hero::after{bottom:0;}
+.hero-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:center;}
+.hero-kicker{font-size:12px;letter-spacing:.42em;color:var(--accent);text-transform:uppercase;margin-bottom:24px;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,5vw,56px);line-height:1.3;letter-spacing:.02em;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero h1 em.intent{font-weight:400;font-size:.42em;letter-spacing:.06em;color:var(--muted);margin-left:14px;white-space:nowrap;}
+.hero-sub{max-width:560px;margin-top:24px;font-size:15.5px;color:var(--muted);}
+.hero-meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px 30px;font-size:14px;color:var(--muted);}
+.hero-meta b{color:var(--text);font-weight:500;}
+.tags{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;}
+.tag{font-size:12.5px;letter-spacing:.05em;color:var(--accent);border:1px solid rgba(201,163,92,.35);border-radius:999px;padding:6px 15px;background:var(--accent-soft);}
+.hero-contact{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;}
+.contact-chip{display:inline-flex;flex-direction:row;align-items:center;gap:10px;border:1px solid rgba(201,163,92,.4);background:var(--accent-soft);border-radius:10px;padding:9px 16px;transition:border-color .2s,background .2s;}
+.contact-chip:hover{border-color:var(--accent);background:rgba(201,163,92,.22);}
+.contact-label{font-size:12px;letter-spacing:.18em;color:var(--accent);white-space:nowrap;}
+.contact-value{font-size:15px;font-weight:500;color:var(--text);letter-spacing:.03em;white-space:nowrap;}
+.portrait{position:relative;justify-self:end;width:100%;max-width:300px;}
+.portrait-frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);padding:10px;}
+.portrait-frame img{border-radius:8px;width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(.15);}
+.portrait-cap{margin-top:12px;display:flex;justify-content:space-between;font-size:12px;color:var(--faint);letter-spacing:.12em;}
+@media(max-width:860px){
+  .wrap{padding:0 18px;}
+  section{padding:56px 0;}
+  .hero{padding:108px 0 52px;}
+  .hero-grid{grid-template-columns:1fr;gap:36px;}
+  .portrait{justify-self:start;max-width:240px;}
+  .hero h1 em.intent{display:block;margin-left:0;margin-top:10px;font-size:.36em;}
+  .nav-inner{height:52px;}
+  .film-info{padding:24px 20px;}
+  .sec-head{margin-bottom:30px;}
+}
+@media(max-width:560px){
+  .hero-meta{gap:8px 18px;font-size:13px;}
+  .hero-contact{gap:10px;}
+  .contact-chip{padding:8px 13px;gap:8px;}
+  .contact-value{font-size:14px;}
+  .lb-stage{max-width:94vw;}
+  .lb-img-wrap{height:58vh;}
+  .film-info h3{font-size:20px;}
+}
+
+/* ============================================================
+   通用板块
+============================================================ */
+section{padding:90px 0;border-top:1px solid var(--line);}
+.sec-head{margin-bottom:44px;}
+.sec-index{font-size:12px;letter-spacing:.35em;color:var(--faint);margin-bottom:12px;}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(26px,3.4vw,36px);letter-spacing:.04em;}
+.sec-head p{margin-top:12px;color:var(--muted);max-width:620px;font-size:14.5px;}
+.group-title{font-family:var(--serif);font-size:17px;color:var(--accent);margin:38px 0 20px;letter-spacing:.08em;display:flex;align-items:center;gap:14px;}
+.group-title::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* ============================================================
+   简介：关于我 + 时间线
+============================================================ */
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;}
+.about-text p{color:var(--muted);font-size:15px;margin-bottom:16px;}
+.about-text p b{color:var(--text);font-weight:500;}
+.timeline{display:grid;gap:0;}
+.tl-item{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);}
+.tl-item:last-child{border-bottom:none;}
+.tl-time{font-family:var(--serif);font-size:13.5px;color:var(--accent);letter-spacing:.05em;white-space:nowrap;}
+.tl-body h4{font-size:15px;font-weight:500;margin-bottom:6px;}
+.tl-body p{font-size:13.5px;color:var(--muted);}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px;}.tl-item{grid-template-columns:100px 1fr;gap:14px;}.tl-time{white-space:normal;font-size:12.5px;}}
+
+/* ============================================================
+   短片项目
+============================================================ */
+.film-list{display:grid;gap:36px;}
+.film-card{display:grid;grid-template-columns:1.55fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.film-card:nth-child(even){grid-template-columns:1fr 1.55fr;}
+.film-card:nth-child(even) .film-media{order:2;}
+.film-media{position:relative;background:#000;aspect-ratio:16/9;}
+.film-media video{width:100%;height:100%;object-fit:cover;display:block;}
+.film-media--wide{aspect-ratio:21/9;}
+.film-media--wide video{object-fit:contain;}
+.film-poster{position:absolute;inset:0;}
+.film-poster img{width:100%;height:100%;object-fit:cover;opacity:.85;}
+.film-info{padding:32px 30px;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;height:100%;}
+.film-year{font-size:12px;letter-spacing:.28em;color:var(--accent);margin-bottom:12px;}
+.film-info h3{font-family:var(--serif);font-size:23px;font-weight:700;margin-bottom:10px;line-height:1.35;}
+.film-role{font-size:13px;color:var(--blue);margin-bottom:12px;letter-spacing:.04em;line-height:1.6;}
+.film-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+.film-meta{margin-top:16px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--faint);}
+.chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.chip{font-size:12px;color:var(--accent);border:1px solid rgba(201,163,92,.3);border-radius:6px;padding:5px 11px;background:var(--accent-soft);line-height:1.4;}
+.film-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;width:fit-content;white-space:nowrap;font-size:14px;font-weight:500;letter-spacing:.03em;color:#eeb58a;background:rgba(232,166,114,.12);border:1px solid rgba(232,166,114,.55);border-radius:9px;padding:10px 20px;box-shadow:0 0 0 1px rgba(232,166,114,.08),0 6px 18px rgba(232,166,114,.12);transition:background .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s;}
+.film-link:hover{background:#e8a672;color:#1a120a;border-color:#e8a672;box-shadow:0 8px 22px rgba(232,166,114,.28);transform:translateY(-1px);}
+.film-poster.placeholder{background:linear-gradient(135deg,#1d1d23,#101013);display:flex;align-items:center;justify-content:center;}
+.film-poster.placeholder::after{content:attr(data-title);font-family:var(--serif);font-size:22px;letter-spacing:.15em;color:var(--faint);}
+@media(max-width:860px){
+  .film-card,.film-card:nth-child(even){grid-template-columns:1fr;}
+  .film-card:nth-child(even) .film-media{order:0;}
+}
+
+/* ============================================================
+   获奖
+============================================================ */
+.award-list{border-top:1px solid var(--line);}
+.award-row{display:grid;grid-template-columns:1fr 1.3fr;gap:20px;padding:22px 8px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .2s;}
+.award-row:hover{background:var(--surface);}
+.award-title{font-size:15.5px;font-weight:500;}
+.award-title small{display:block;font-size:12.5px;color:var(--faint);margin-top:4px;letter-spacing:.05em;}
+.award-work{font-size:14px;color:var(--muted);}
+@media(max-width:700px){.award-row{grid-template-columns:1fr;gap:6px;}}
+
+/* ============================================================
+   画廊
+============================================================ */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.gallery.cols-4{grid-template-columns:repeat(4,1fr);}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:zoom-in;transition:transform .25s,border-color .25s;}
+.shot:hover{transform:translateY(-4px);border-color:rgba(201,163,92,.4);}
+.shot-thumb{aspect-ratio:16/10;overflow:hidden;background:#000;}
+.shot-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.shot:hover .shot-thumb img{transform:scale(1.04);}
+.shot-body{padding:16px 18px;}
+.shot-body h4{font-size:15px;font-weight:500;}
+.shot-body p{font-size:12.5px;color:var(--muted);margin-top:5px;}
+.shot-tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.shot-tags span{font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:2px 9px;letter-spacing:.05em;}
+@media(max-width:960px){.gallery,.gallery.cols-4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.gallery,.gallery.cols-4{grid-template-columns:1fr;}}
+
+/* ============================================================
+   页脚 + 部署说明
+============================================================ */
+footer{border-top:1px solid var(--line);padding:56px 0 40px;}
+.foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center;}
+.foot-inner p{color:var(--faint);font-size:13px;}
+details.deploy{margin-top:34px;border:1px solid var(--line);border-radius:12px;background:var(--surface);}
+details.deploy summary{cursor:pointer;padding:18px 22px;font-size:14px;color:var(--muted);list-style:none;display:flex;justify-content:space-between;align-items:center;}
+details.deploy summary::after{content:"+";color:var(--accent);font-size:18px;}
+details.deploy[open] summary::after{content:"−";}
+details.deploy .deploy-body{padding:0 22px 22px;font-size:13.5px;color:var(--muted);}
+details.deploy ol{padding-left:20px;display:grid;gap:10px;}
+details.deploy code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--text);}
+
+/* ============================================================
+   Lightbox
+============================================================ */
+.lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(6,6,8,.94);backdrop-filter:blur(8px);}
+.lightbox.open{display:flex;}
+.lb-stage{max-width:min(1100px,90vw);width:100%;}
+.lb-img-wrap{width:100%;height:72vh;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;touch-action:none;}
+.lb-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;transform-origin:center center;transition:transform .2s ease;user-select:none;-webkit-user-drag:no-drag;cursor:zoom-in;touch-action:none;}
+.lb-img-wrap img.dragging{transition:none;cursor:grabbing;}
+.lb-zoom{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.lb-zoom-btn{background:none;border:1px solid var(--line);color:var(--text);width:36px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;transition:border-color .2s,color .2s;}
+.lb-zoom-btn:hover{border-color:var(--accent);color:var(--accent);}
+#lb-zoom-reset{width:auto;padding:0 14px;font-size:12.5px;}
+#lb-zoom-level{font-size:12.5px;color:var(--muted);min-width:52px;text-align:center;}
+.lb-caption{margin-top:14px;text-align:center;}
+.lb-caption h4{font-family:var(--serif);font-size:18px;font-weight:600;}
+.lb-caption p{font-size:13px;color:var(--muted);margin-top:6px;}
+.lb-count{position:absolute;top:26px;left:30px;font-size:13px;color:var(--faint);letter-spacing:.15em;}
+.lb-btn{position:absolute;background:none;border:1px solid var(--line);color:var(--text);width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;}
+.lb-btn:hover{border-color:var(--accent);color:var(--accent);}
+.lb-close{top:22px;right:26px;}
+.lb-prev{left:24px;top:50%;transform:translateY(-50%);}
+.lb-next{right:24px;top:50%;transform:translateY(-50%);}
+@media(max-width:700px){.lb-prev{left:10px;}.lb-next{right:10px;}}
+</style>
+</head>
+<body>
+
+<!-- ======================= 导航 ======================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#about">TONG<span>·</span>LE</a>
+    <div class="nav-links">
+      <a href="#about">简介</a>
+      <a href="#films">项目作品</a>
+      <a href="#awards">获奖展映</a>
+      <a href="#characters">角色设定</a>
+      <a href="#props">道具设定</a>
+      <a href="#scenes">场景概念</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================= Hero / 简介 ======================= -->
+<header class="hero" id="about">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-kicker">AI Video Creator · Portfolio 2026</div>
+      <h1>童乐 <em class="intent">求职意向：AI美术/视频生成</em></h1>
+      <p class="hero-sub">
+        具备扎实绘画与动漫制作功底，专注 AIGC 短片的角色 / 场景概念设计与图生视频；
+        擅长以 UE5 美术流程管控解决 AI 生成场景的一致性问题，通过动画预演前置规划镜头与运镜，稳定成片视觉连贯性。
+      </p>
+      <div class="tags">
+        <span class="tag">角色设定</span>
+        <span class="tag">场景概念设计</span>
+        <span class="tag">图生视频</span>
+        <span class="tag">UE5 空间一致性</span>
+        <span class="tag">分镜与镜头规划</span>
+        <span class="tag">光影氛围营造</span>
+        <span class="tag">3ds Max</span>
+        <span class="tag">Photoshop</span>
+        <span class="tag">Substance Painter</span>
+        <span class="tag">ZBrush</span>
+        <span class="tag">剪映</span>
+      </div>
+      <div class="hero-meta">
+        <span>年龄 · <b>25 岁</b></span>
+        <span>政治面貌 · <b>中共党员</b></span>
+        <span>坐标 · <b>长沙</b></span>
+        <span>状态 · <b>随时到岗</b></span>
+      </div>
+      <div class="hero-contact">
+        <a class="contact-chip" href="tel:18949456780">
+          <span class="contact-label">电话</span>
+          <span class="contact-value">189-4945-6780</span>
+        </a>
+        <a class="contact-chip" href="mailto:2662307708@qq.com">
+          <span class="contact-label">邮箱</span>
+          <span class="contact-value">2662307708@qq.com</span>
+        </a>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="portrait-frame">
+        <img src="assets/portrait.jpg" alt="童乐 证件照">
+      </div>
+      <div class="portrait-cap"><span>TONG LE</span><span>PORTFOLIO</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= 关于我 + 经历 ======================= -->
+<section id="profile">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="sec-index" style="margin-bottom:12px;">PROFILE</div>
+      <h2 style="font-family:var(--serif);font-size:26px;margin-bottom:20px;">关于我</h2>
+      <p>
+        熟练使用<b>即梦、可灵</b>等 AI 工具完成角色设定、场景设计与图生视频，具备扎实的影视美术审美，
+        能够独立完成光影氛围营造与镜头语言规划，通过<b>景别、运镜与光影节奏</b>强化叙事张力。
+      </p>
+      <p>
+        能够使用 <b>UE5</b> 解决空间一致性问题，以动画预演前置规划镜头与运镜，提升 AI 画面可控性；
+        同时掌握 <b>UE5、3ds Max、Photoshop、Substance Painter、ZBrush、剪映</b> 等软件辅助完成项目需求。
+      </p>
+      <p>
+        热爱影视创作，自主学习与问题解决能力强，善于沟通，富有创新意识；对画面精益求精，
+        能在高强度创作中持续迭代。
+      </p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ======================= 项目经历与原创作品 ======================= -->
+<section id="films">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-index">01 / PROJECTS</div>
+      <h2>项目经历与原创作品</h2>
+      <p>公司任职期间参与制作的 AIGC 短片项目，以及独立完成全流程的个人原创作品。</p>
+    </div>
+    <div class="group-title">公司项目经历</div>
+    <div class="film-list" id="film-company"></div>
+    <div class="group-title">个人原创 · 全流程作品</div>
+    <div class="film-list" id="film-original"></div>
+  </div>
+</section>
+
+<!-- ======================= 获奖荣誉 ======================= -->
+<section id="awards">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-index">02 / AWARDS</div>
+      <h2>项目获奖与展映</h2>
+    </div>
+
+    <div class="group-title">影展 · 行业荣誉</div>
+    <div class="award-list" id="award-film"></div>
+
+    <div class="group-title">在校 · 竞赛与服役表彰</div>
+    <div class="award-list" id="award-school"></div>
+  </div>
+</section>
+
+<!-- ======================= 角色设定 ======================= -->
+<section id="characters">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-index">03 / CHARACTERS</div>
+      <h2>角色设定</h2>
+      <p>《故国墟上》双主角概念设定，含全身 / 头部三视图。</p>
+    </div>
+    <div class="group-title">霍远 · 玄狼卫武将</div>
+    <div class="gallery" id="grid-huoyuan"></div>
+    <div class="group-title">文哲 · 史官</div>
+    <div class="gallery" id="grid-wenzhe"></div>
+  </div>
+</section>
+
+<!-- ======================= 道具设定 ======================= -->
+<section id="props">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-index">04 / PROPS</div>
+      <h2>道具设定</h2>
+      <p>片中兵器与核心信物概念稿。</p>
+    </div>
+    <div class="gallery cols-4" id="grid-props"></div>
+  </div>
+</section>
+
+<!-- ======================= 场景概念 ======================= -->
+<section id="scenes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-index">05 / ENVIRONMENTS</div>
+      <h2>场景概念</h2>
+      <p>各短片的场景气氛与空间设定，按题材分组。</p>
+    </div>
+    <div class="group-title">《故国墟上》· 废弃书库中庭</div>
+    <div class="gallery" id="grid-scene-shuku"></div>
+    <div class="group-title">《一把军号》· 河谷战场</div>
+    <div class="gallery" id="grid-scene-war"></div>
+    <div class="group-title">《家人无法验证》· 近未来都市</div>
+    <div class="gallery" id="grid-scene-city"></div>
+  </div>
+</section>
+
+<!-- ======================= 页脚 ======================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <p>© 2026 童乐 · AI美术/视频生成 作品集</p>
+      <p>本页面为静态单页，可直接部署至 GitHub Pages。</p>
+    </div>
+    <details class="deploy">
+      <summary>部署到 GitHub Pages · 快速参考</summary>
+      <div class="deploy-body">
+        <ol>
+          <li>在 GitHub 新建公开仓库，名称可设为 <code>用户名.github.io</code> 或 <code>portfolio</code>。</li>
+          <li>将 <code>index.html</code> 与 <code>assets/</code> 素材目录一起上传到仓库根目录。</li>
+          <li>进入 <code>Settings → Pages</code>，Source 选 <code>Deploy from a branch</code>，分支 <code>main</code>、目录 <code>/ (root)</code>，保存。</li>
+          <li>等待 1–3 分钟，访问 <code>https://用户名.github.io/</code>（或 <code>https://用户名.github.io/portfolio/</code>）。</li>
+        </ol>
+        <p style="margin-top:14px;">完整部署步骤与「文字 / 图片 / 视频替换指南」见随附 <code>README.md</code>。</p>
+      </div>
+    </details>
+  </div>
+</footer>
+
+<!-- ======================= Lightbox ======================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+  <div class="lb-count" id="lb-count"></div>
+  <button class="lb-btn lb-close" id="lb-close" aria-label="关闭">✕</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="上一张">‹</button>
+  <div class="lb-stage">
+    <div class="lb-img-wrap" id="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+    <div class="lb-zoom">
+      <button class="lb-zoom-btn" id="lb-zoom-out" aria-label="缩小">−</button>
+      <span id="lb-zoom-level">100%</span>
+      <button class="lb-zoom-btn" id="lb-zoom-in" aria-label="放大">＋</button>
+      <button class="lb-zoom-btn" id="lb-zoom-reset" aria-label="复位">复位</button>
+    </div>
+    <div class="lb-caption">
+      <h4 id="lb-title"></h4>
+      <p id="lb-desc"></p>
+    </div>
+  </div>
+  <button class="lb-btn lb-next" id="lb-next" aria-label="下一张">›</button>
+</div>
+
+<script>
+/* ============================================================
+   经历时间线
+============================================================ */
+const TIMELINE = [
+  { time:"2026.02 – 2026.11", title:"长沙谷谷智影科技有限公司 · AIGC 短片美术 / 图生视频",
+    desc:"参与多部 AIGC 短片制作，负责角色、场景概念设计与图生视频；通过 UE5 美术流程管控解决 AI 生成场景不一致问题，稳定成片视觉连贯性。" },
+  { time:"2024.09 – 2026.01", title:"安徽艺术学院 · 绘画专业",
+    desc:"多次参加省级、国家级各类大赛，获全国大学生广告艺术大赛省赛一等奖、全国数媒大赛国赛三等奖、安徽省原创动漫大赛省赛二等奖。" },
+  { time:"2024.03 – 2024.09", title:"南京王氏教育 · UE5 场景地编 / 次世代 PBR 全流程",
+    desc:"系统学习 UE5 场景地编与次世代 PBR 全流程，作品获优秀作品奖。" },
+  { time:"2021.09 – 2023.06", title:"安徽新闻出版职业技术学院 · 动漫制作技术（班长）",
+    desc:"三好学生、优秀班干；获互联网+ 创新创业大赛省赛金奖、乡村振兴创新创业大赛省赛二等奖、计算机设计大赛省赛三等奖。" },
+  { time:"2019.09 – 2021.09", title:"武警第一机动总队 · 服役",
+    desc:"先后参加 2020 汉中洋县特大滑坡体处置任务、2021 河南巩义洪涝灾害救援任务；服役期间荣获“四有”优秀士兵及嘉奖。" }
+];
+
+/* ============================================================
+   短片作品
+   video: 有本地成片时填 src；无成片时 poster 作为占位海报，
+   替换时把 type 改为 "video" 并填入 assets/video/ 下的成片路径。
+============================================================ */
+/* 公司项目经历：link 为平台作品跳转占位，发布前替换为真实链接 */
+const FILMS_COMPANY = [
+  {
+    title:"《1999·未被抹去的记忆》", year:"军事科幻 · AIGC 短片 · 公司项目",
+    role:"UE5 场景一致性管控 · 图生视频",
+    desc:"使用 UE5 引擎管控场景一致性，负责图生视频工作，保障成片画面连贯稳定。",
+    meta:["军事科幻","UE5 场景一致性","图生视频"],
+    chips:["B 站热门登顶","单日播放破百万","入围香港国际 AI 电影节","入围紫荆花国际电影节"],
+    type:"poster", poster:"assets/covers/cover-1999.jpg",
+    link:"https://www.bilibili.com/video/BV1L9AjzwESn/?spm_id_from=333.337.search-card.all.click&vd_source=7b71f93e646cc7741516841770fbf382"
+  },
+  {
+    title:"《天上海》", year:"东方科幻灾难 · AIGC 短片 · 公司项目",
+    role:"图生视频 · UE5 场景一致性 · 视觉方案协同",
+    desc:"负责图生视频与 UE5 场景一致性管控，协同团队推进视觉方案落地。",
+    meta:["东方科幻","灾难题材","团队协作"],
+    chips:["北纬 30° 科幻电影周 · 年度 AI 创作"],
+    type:"poster", poster:"assets/covers/cover-tianshanghai.jpg",
+    link:"https://weixin.qq.com/sph/ABjUkxYXAC"
+  },
+  {
+    title:"《一把军号》", year:"红色主旋律 · AIGC 短片 · 公司项目",
+    role:"场景概念设定",
+    desc:"配合官方（中国军号）题材完成场景概念设定，统一画面风格与空间氛围。",
+    meta:["红色主旋律","官方题材","场景概念"],
+    chips:["军方平台重点展播","抖音百万播放","20 万点赞"],
+    type:"poster", poster:"assets/covers/cover-junhao.jpg",
+    link:"https://weixin.qq.com/sph/Awi5Du4eRU"
+  },
+  {
+    title:"《家人无法验证》", year:"近未来科幻 · AIGC 短片 · 公司项目",
+    role:"图生视频 · 场景概念设定",
+    desc:"负责图生视频与近未来都市场景概念设定，把控画面氛围与空间一致性。",
+    meta:["近未来科幻","场景概念","图生视频"],
+    chips:["抖音百万播放","30 万点赞","入围北纬 30° 科幻电影周","「海岸奇妙夜·城墙短片」展映开场影片"],
+    type:"poster", poster:"assets/covers/cover-jiaren.jpg",
+    link:"https://weixin.qq.com/sph/AdH2nKv1RN"
+  }
+];
+
+/* 个人原创 · 全流程作品 */
+const FILMS_ORIGINAL = [
+  {
+    title:"《故国墟上》", year:"国风史诗 · 个人原创全流程",
+    role:"角色 / 场景概念设定 · 分镜拆解 · 图生视频 · 后期",
+    desc:"亡国十年后，武将霍远闯入废弃书库质问史官文哲，揭开“青铜之约”背后先帝的谎言。",
+    meta:["21:9 宽银幕","ARRI ALEXA Mini LF","柯达 Vision3 500T","Seedance 2.5"],
+    chips:["角色设定","场景设定","分镜拆解","图生视频"],
+    type:"video", poster:"assets/scenes/shuku-zhengshi.jpg",
+    src:"assets/video/guoxu-shang.mp4"
+  }
+];
+
+/* ============================================================
+   获奖
+============================================================ */
+const AWARDS_FILM = [
+  { title:"香港国际 AI 电影节 · 入围", small:"国际影展", work:"《1999·未被抹去的记忆》" },
+  { title:"紫荆花国际电影节 · 入围", small:"国际影展", work:"《1999·未被抹去的记忆》" },
+  { title:"北纬 30° 科幻电影周 · 年度 AI 创作", small:"行业评选", work:"《天上海》" },
+  { title:"北纬 30° 科幻电影周 · 入围", small:"影展入选", work:"《家人无法验证》" },
+  { title:"军方平台重点展播", small:"主旋律作品 · 抖音百万播放 / 20 万点赞", work:"《一把军号》" },
+  { title:"「海岸奇妙夜·城墙短片」展映开场影片", small:"抖音百万播放 / 30 万点赞", work:"《家人无法验证》" }
+];
+const AWARDS_SCHOOL = [
+  { title:"全国大学生广告艺术大赛 · 省赛一等奖", small:"国家级赛事省级奖项", work:"绘画 / 视觉设计方向" },
+  { title:"全国数媒大赛 · 国赛三等奖", small:"国家级赛事", work:"数字媒体方向" },
+  { title:"安徽省原创动漫大赛 · 省赛二等奖", small:"省级赛事", work:"动漫方向" },
+  { title:"互联网+ 创新创业大赛 · 省赛金奖", small:"省级赛事", work:"在校期间" },
+  { title:"乡村振兴创新创业大赛 · 省赛二等奖", small:"省级赛事", work:"在校期间" },
+  { title:"计算机设计大赛 · 省赛三等奖", small:"省级赛事", work:"在校期间" },
+  { title:"UE5 场景地编 / 次世代 PBR 全流程 · 优秀作品奖", small:"培训机构结业评定", work:"南京王氏教育" },
+  { title:"“四有”优秀士兵 · 嘉奖", small:"服役表彰", work:"武警第一机动总队" }
+];
+
+/* ============================================================
+   角色 / 道具 / 场景数据
+============================================================ */
+const CHARACTERS_HUOYUAN = [
+  { src:"assets/characters/huoyuan-turnaround.jpg", title:"霍远 · 全身三视图", desc:"正面 / 侧面 / 背面。玄狼图腾玄铁旧甲，左肩狼头圆肩甲，古铜兽面护腰，鱼鳞裙与暗纹披风，背负旧剑。", tags:["主角","武将","三视图"] },
+  { src:"assets/characters/huoyuan-head.jpg", title:"霍远 · 头部三视图", desc:"正面 / 侧面 / 背面。刚毅面容，胡茬，束发配古铜发冠发簪，带十年风霜的疲惫与决绝。", tags:["头部","三视图"] }
+];
+const CHARACTERS_WENZHE = [
+  { src:"assets/characters/wenzhe-turnaround.jpg", title:"文哲 · 全身三视图", desc:"正面 / 侧面 / 背面。黛青墨色暗纹长袍，高髻黑布发巾配旧木发簪，清瘦窄长脸，短髭山羊须夹灰。", tags:["主角","史官","三视图"] },
+  { src:"assets/characters/wenzhe-head.jpg", title:"文哲 · 头部三视图", desc:"正面 / 侧面 / 背面。沉静深沉的眼神，史官气质。", tags:["头部","三视图"] }
+];
+const PROPS = [
+  { src:"assets/props/peijian.jpg", title:"佩剑 · 旧长剑", desc:"霍远随身旧剑，剑身带磨损与使用痕迹。", tags:["兵器"] },
+  { src:"assets/props/jianqiao.jpg", title:"剑鞘", desc:"旧木与铜件包裹的剑鞘，暗纹磨损。", tags:["兵器"] },
+  { src:"assets/props/peijian-jianqiao.jpg", title:"佩剑与剑鞘", desc:"入鞘状态整体设定。", tags:["兵器"] },
+  { src:"assets/props/qingtong-xinwu.jpg", title:"青铜走龙信物", desc:"S 形盘龙，深灰铜锈，错金纹饰磨损；“青铜之约”的核心道具。", tags:["信物"] }
+];
+const SCENES_SHUKU = [
+  { src:"assets/scenes/shuku-zhengshi.jpg", title:"书库中庭 · 正视图", desc:"残破穹顶漏下奶油黄体积光束，堆积如山的残卷与蛛网，木构两层回廊。", tags:["内景","日","体积光"] },
+  { src:"assets/scenes/shuku-fandajia.jpg", title:"书库内景 · 书架纵深", desc:"歪斜书架、陶罐与断木构成的空间纵深。", tags:["内景","纵深"] },
+  { src:"assets/scenes/shuku-fandajia-2.jpg", title:"书库门洞 · 反打", desc:"自门内侧朝向门口的反打视角，门框框架构图。", tags:["内景","反打"] }
+];
+const SCENES_WAR = [
+  { src:"assets/scenes/anshun-daduhe.jpg", title:"安顺场 · 大渡河全景", desc:"战火中的峡谷河流，两岸硝烟与火光。", tags:["外景","战火","全景"] },
+  { src:"assets/scenes/bianfang-caodi.jpg", title:"大渡河沿岸草地边防", desc:"晨雾中的河谷草坡与防线。", tags:["外景","晨雾"] },
+  { src:"assets/scenes/shangu-shulin.jpg", title:"山谷旁树林", desc:"河谷松林与对岸山脊。", tags:["外景","树林"] },
+  { src:"assets/scenes/shangu-paojihou.jpg", title:"沿江山谷 · 炮击后", desc:"炮击后的河谷，焦木与残火。", tags:["外景","炮击后"] },
+  { src:"assets/scenes/shanhui-changchang.jpg", title:"闪回战场", desc:"爆炸与硝烟弥漫的焦土阵地。", tags:["外景","闪回"] },
+  { src:"assets/scenes/shanlu-fupai.jpg", title:"山路俯拍", desc:"山林间蜿蜒山路与河流的俯拍视角。", tags:["外景","俯拍"] },
+  { src:"assets/scenes/xiuzheng-shulin.jpg", title:"休整树林", desc:"林间临时休整营地。", tags:["外景","营地"] },
+  { src:"assets/scenes/yanan-shanlu.jpg", title:"沿岸山路", desc:"沿河山间土路，湿冷雾气。", tags:["外景","山路"] },
+  { src:"assets/scenes/yanjiang-shangu.jpg", title:"沿江山谷", desc:"对峙山体夹持的河谷通道。", tags:["外景","山谷"] }
+];
+const SCENES_CITY = [
+  { src:"assets/scenes/jiaren-qiwei-1.jpg", title:"旧城雨街 · 气氛图", desc:"雨后湿滑的旧城街区，无人配送车与高架列车。", tags:["近未来","雨后","街景"] },
+  { src:"assets/scenes/caopo.jpg", title:"草坡远眺城市天际线", desc:"黄昏草坡尽头的未来城市轮廓。", tags:["近未来","黄昏","远景"] },
+  { src:"assets/scenes/lubian.jpg", title:"路边小屋与远方城市", desc:"荒野路边小屋，远处城市天际线。", tags:["近未来","黄昏"] }
+];
+
+/* ============================================================
+   渲染
+============================================================ */
+function el(tag, cls, html){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+/* 时间线 */
+const tl = document.getElementById("timeline");
+TIMELINE.forEach(item => {
+  const row = el("div","tl-item",
+    `<div class="tl-time">${item.time}</div>
+     <div class="tl-body"><h4>${item.title}</h4><p>${item.desc}</p></div>`);
+  tl.appendChild(row);
+});
+
+/* 短片 / 项目 */
+function renderFilms(listId, films){
+  const box = document.getElementById(listId);
+  films.forEach(f => {
+    let media;
+    if(f.type === "video"){
+      media = `<video controls preload="metadata" playsinline poster="${f.poster}">
+        <source src="${f.src}" type="video/mp4">您的浏览器不支持视频播放。
+      </video>`;
+    }else if(f.poster){
+      media = `<div class="film-poster">
+        <img src="${f.poster}" alt="${f.title}">
+      </div>`;
+    }else{
+      media = `<div class="film-poster placeholder" data-title="${f.title}"></div>`;
+    }
+    const link = f.link ? `<a class="film-link" href="${f.link}" target="_blank" rel="noopener">查看平台作品 ↗</a>` : "";
+    const mediaCls = f.type === "video" ? "film-media film-media--wide" : "film-media";
+    const card = el("article","film-card",
+      `<div class="${mediaCls}">${media}</div>
+       <div class="film-info">
+         <div class="film-year">${f.year}</div>
+         <h3>${f.title}</h3>
+         <div class="film-role">${f.role}</div>
+         <p class="film-desc">${f.desc}</p>
+         <div class="chips">${f.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>
+         <div class="film-meta">${f.meta.map(m=>`<span>${m}</span>`).join("")}</div>
+         ${link}
+       </div>`);
+    box.appendChild(card);
+  });
+}
+renderFilms("film-company", FILMS_COMPANY);
+renderFilms("film-original", FILMS_ORIGINAL);
+
+/* 获奖 */
+function renderAwards(id, list){
+  const box = document.getElementById(id);
+  list.forEach(a => {
+    box.appendChild(el("div","award-row",
+      `<div class="award-title">${a.title}<small>${a.small}</small></div>
+       <div class="award-work">${a.work}</div>`));
+  });
+}
+renderAwards("award-film", AWARDS_FILM);
+renderAwards("award-school", AWARDS_SCHOOL);
+
+/* 画廊 */
+function renderGallery(gridId, items, group){
+  const grid = document.getElementById(gridId);
+  items.forEach(item => {
+    const card = el("figure","shot",
+      `<div class="shot-thumb">
+         <img src="${item.src}" alt="${item.title}" data-lightbox data-group="${group}"
+              data-title="${item.title}" data-desc="${item.desc}">
+       </div>
+       <figcaption class="shot-body">
+         <h4>${item.title}</h4>
+         <p>${item.desc}</p>
+         <div class="shot-tags">${item.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+       </figcaption>`);
+    grid.appendChild(card);
+  });
+}
+renderGallery("grid-huoyuan", CHARACTERS_HUOYUAN, "huoyuan");
+renderGallery("grid-wenzhe", CHARACTERS_WENZHE, "wenzhe");
+renderGallery("grid-props", PROPS, "props");
+renderGallery("grid-scene-shuku", SCENES_SHUKU, "shuku");
+renderGallery("grid-scene-war", SCENES_WAR, "war");
+renderGallery("grid-scene-city", SCENES_CITY, "city");
+
+/* ============================================================
+   Lightbox：同组切换 / 缩放拖拽 / 键盘 / 遮罩关闭
+============================================================ */
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbWrap = document.getElementById("lb-img-wrap");
+const lbTitle = document.getElementById("lb-title");
+const lbDesc = document.getElementById("lb-desc");
+const lbCount = document.getElementById("lb-count");
+const lbZoomLevel = document.getElementById("lb-zoom-level");
+let currentGroup = [];
+let currentIndex = 0;
+
+/* 缩放与平移状态 */
+let scale = 1, tx = 0, ty = 0;
+const ZOOM_MIN = 1, ZOOM_MAX = 3.5;
+
+function clampPan(){
+  const maxTx = Math.max(0, (lbImg.offsetWidth * scale - lbWrap.clientWidth) / 2);
+  const maxTy = Math.max(0, (lbImg.offsetHeight * scale - lbWrap.clientHeight) / 2);
+  tx = Math.min(maxTx, Math.max(-maxTx, tx));
+  ty = Math.min(maxTy, Math.max(-maxTy, ty));
+}
+function applyZoom(){
+  clampPan();
+  lbImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  lbZoomLevel.textContent = Math.round(scale * 100) + "%";
+  lbImg.style.cursor = scale > 1 ? "grab" : "zoom-in";
+}
+function resetZoom(){ scale = 1; tx = 0; ty = 0; applyZoom(); }
+function setScale(next){
+  scale = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, next));
+  if(scale === 1){ tx = 0; ty = 0; }
+  applyZoom();
+}
+
+function getGroup(group){
+  return Array.from(document.querySelectorAll(`img[data-lightbox][data-group="${group}"]`));
+}
+function openLightbox(img){
+  currentGroup = getGroup(img.dataset.group);
+  currentIndex = currentGroup.indexOf(img);
+  show();
+  lightbox.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function show(){
+  const img = currentGroup[currentIndex];
+  lbImg.src = img.src; lbImg.alt = img.alt;
+  lbTitle.textContent = img.dataset.title || "";
+  lbDesc.textContent = img.dataset.desc || "";
+  lbCount.textContent = `${String(currentIndex+1).padStart(2,"0")} / ${String(currentGroup.length).padStart(2,"0")}`;
+  resetZoom();
+}
+function closeLightbox(){
+  lightbox.classList.remove("open");
+  document.body.style.overflow = "";
+  lbImg.src = "";
+  resetZoom();
+}
+function step(dir){
+  currentIndex = (currentIndex + dir + currentGroup.length) % currentGroup.length;
+  show();
+}
+
+/* 滚轮缩放 */
+lightbox.addEventListener("wheel", e => {
+  if(!lightbox.classList.contains("open")) return;
+  e.preventDefault();
+  setScale(scale + (e.deltaY < 0 ? 0.25 : -0.25));
+}, { passive:false });
+
+/* 拖拽平移（放大后可用，事件绑定到画布层，避免点不到图片边缘） */
+let dragging = false, moved = false, startX = 0, startY = 0, origX = 0, origY = 0;
+function dragDown(e){
+  if(scale <= 1) return;
+  dragging = true; moved = false;
+  startX = e.clientX; startY = e.clientY;
+  origX = tx; origY = ty;
+  lbImg.classList.add("dragging");
+  try{ lbWrap.setPointerCapture(e.pointerId); }catch(err){}
+  e.preventDefault();
+}
+function dragMove(e){
+  if(!dragging) return;
+  const dx = e.clientX - startX, dy = e.clientY - startY;
+  if(Math.abs(dx) + Math.abs(dy) > 3) moved = true;
+  tx = origX + dx; ty = origY + dy;
+  applyZoom();
+}
+function dragUp(){ dragging = false; lbImg.classList.remove("dragging"); }
+lbWrap.addEventListener("pointerdown", dragDown);
+lbWrap.addEventListener("pointermove", dragMove);
+lbWrap.addEventListener("pointerup", dragUp);
+lbWrap.addEventListener("pointercancel", dragUp);
+lbWrap.addEventListener("pointerleave", dragUp);
+
+/* 双击：100% ↔ 250%（拖拽后不触发） */
+lbWrap.addEventListener("dblclick", () => { if(!moved) setScale(scale > 1 ? 1 : 2.5); });
+
+/* 缩放按钮 */
+document.getElementById("lb-zoom-in").addEventListener("click", () => setScale(scale + 0.25));
+document.getElementById("lb-zoom-out").addEventListener("click", () => setScale(scale - 0.25));
+document.getElementById("lb-zoom-reset").addEventListener("click", resetZoom);
+
+document.addEventListener("click", e => {
+  const img = e.target.closest("img[data-lightbox]");
+  if(img) openLightbox(img);
+});
+document.getElementById("lb-close").addEventListener("click", closeLightbox);
+document.getElementById("lb-prev").addEventListener("click", () => step(-1));
+document.getElementById("lb-next").addEventListener("click", () => step(1));
+lightbox.addEventListener("click", e => { if(e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", e => {
+  if(!lightbox.classList.contains("open")) return;
+  if(e.key === "Escape") closeLightbox();
+  if(e.key === "ArrowLeft") step(-1);
+  if(e.key === "ArrowRight") step(1);
+  if(e.key === "+" || e.key === "=") setScale(scale + 0.25);
+  if(e.key === "-" || e.key === "_") setScale(scale - 0.25);
+  if(e.key === "0") resetZoom();
+});
+</script>
+</body>
+</html>
