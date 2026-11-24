@@ -183,18 +183,11 @@ section{padding:90px 0;border-top:1px solid var(--line);}
 @media(max-width:560px){.gallery,.gallery.cols-4{grid-template-columns:1fr;}}
 
 /* ============================================================
-   页脚 + 部署说明
+   页脚
 ============================================================ */
 footer{border-top:1px solid var(--line);padding:56px 0 40px;}
 .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center;}
 .foot-inner p{color:var(--faint);font-size:13px;}
-details.deploy{margin-top:34px;border:1px solid var(--line);border-radius:12px;background:var(--surface);}
-details.deploy summary{cursor:pointer;padding:18px 22px;font-size:14px;color:var(--muted);list-style:none;display:flex;justify-content:space-between;align-items:center;}
-details.deploy summary::after{content:"+";color:var(--accent);font-size:18px;}
-details.deploy[open] summary::after{content:"−";}
-details.deploy .deploy-body{padding:0 22px 22px;font-size:13.5px;color:var(--muted);}
-details.deploy ol{padding-left:20px;display:grid;gap:10px;}
-details.deploy code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--text);}
 
 /* ============================================================
    Lightbox
@@ -391,20 +384,7 @@ details.deploy code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px
   <div class="wrap">
     <div class="foot-inner">
       <p>© 2026 童乐 · AI美术/视频生成 作品集</p>
-      <p>本页面为静态单页，可直接部署至 GitHub Pages。</p>
     </div>
-    <details class="deploy">
-      <summary>部署到 GitHub Pages · 快速参考</summary>
-      <div class="deploy-body">
-        <ol>
-          <li>在 GitHub 新建公开仓库，名称可设为 <code>用户名.github.io</code> 或 <code>portfolio</code>。</li>
-          <li>将 <code>index.html</code> 与 <code>assets/</code> 素材目录一起上传到仓库根目录。</li>
-          <li>进入 <code>Settings → Pages</code>，Source 选 <code>Deploy from a branch</code>，分支 <code>main</code>、目录 <code>/ (root)</code>，保存。</li>
-          <li>等待 1–3 分钟，访问 <code>https://用户名.github.io/</code>（或 <code>https://用户名.github.io/portfolio/</code>）。</li>
-        </ol>
-        <p style="margin-top:14px;">完整部署步骤与「文字 / 图片 / 视频替换指南」见随附 <code>README.md</code>。</p>
-      </div>
-    </details>
   </div>
 </footer>
 
@@ -448,10 +428,7 @@ const TIMELINE = [
 
 /* ============================================================
    短片作品
-   video: 有本地成片时填 src；无成片时 poster 作为占位海报，
-   替换时把 type 改为 "video" 并填入 assets/video/ 下的成片路径。
 ============================================================ */
-/* 公司项目经历：link 为平台作品跳转占位，发布前替换为真实链接 */
 const FILMS_COMPANY = [
   {
     title:"《1999·未被抹去的记忆》", year:"军事科幻 · AIGC 短片 · 公司项目",
